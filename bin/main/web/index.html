@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Permission Usage Map · __APUM_PROJECT_NAME__</title>
+<style>/*__APUM_STYLES__*/</style>
+</head>
+<body data-theme="dark">
+<header class="topbar">
+  <div class="brand" title="APUM analyzes an Android project and maps every declared permission to the code that actually uses it">
+    <span class="logo">APUM</span>
+    <span class="brand-text">
+      <strong>APUM</strong>
+      <small>Android Permission Usage Mapper</small>
+    </span>
+  </div>
+  <div class="topbar-actions">
+    <button id="theme-toggle" class="ghost-button" type="button" title="Switch between the dark and light colour theme">Theme</button>
+    <button id="export-json" class="ghost-button" type="button" title="Download the full analysis result as a JSON file">JSON</button>
+  </div>
+</header>
+
+<main>
+  <section class="project-line">
+    <h1 id="project-name" title="Name of the analyzed project directory">-</h1>
+    <p id="project-meta" title="Application id, SDK levels and the number of source files that were scanned">-</p>
+  </section>
+
+  <section class="summary">
+    <div class="stats" id="summary-stats"></div>
+    <p class="hint" title="Declared and used, declared but never used and missing from manifest are mutually exclusive states, no permission is counted twice">Every permission falls into exactly one state, the categories never overlap.</p>
+  </section>
+
+  <section class="panel">
+    <div class="panel-head">
+      <h2 title="Every permission that is either declared in the manifest or detected in the code">Permissions</h2>
+      <div class="filters">
+        <input id="search" type="search" placeholder="Search permission, file or symbol"
+               title="Filter the list by permission name, description, file path or detected symbol" />
+        <select id="status-filter" title="Filter by how the permission relates to the code">
+          <option value="">All statuses</option>
+          <option value="USED">Declared and used</option>
+          <option value="DECLARED_UNUSED">Declared, never used</option>
+          <option value="UNDECLARED_USAGE">Missing from manifest</option>
+          <option value="REQUESTED_ONLY">Requested only</option>
+          <option value="WEAK_SIGNAL">Weak signal</option>
+          <option value="ALTERNATIVE_COVERED">Covered by alternative</option>
+        </select>
+        <select id="risk-filter" title="Filter by the risk level APUM assigned to the permission">
+          <option value="">All risks</option>
+          <option value="HIGH">High risk</option>
+          <option value="MEDIUM">Medium risk</option>
+          <option value="LOW">Low risk</option>
+        </select>
+      </div>
+    </div>
+    <p class="hint" title="Click any row to open the manifest declarations, code evidence and call paths">Click a permission to expand its evidence.</p>
+    <div id="permission-list" class="permission-list"></div>
+  </section>
+
+  <section class="panel">
+    <div class="panel-head">
+      <h2 title="Concrete problems detected during the analysis, ordered by severity">Findings</h2>
+      <span class="muted" id="finding-caption" title="Number of findings per severity level"></span>
+    </div>
+    <div id="finding-list" class="finding-list"></div>
+  </section>
+
+  <section class="grid-two">
+    <div class="panel">
+      <div class="panel-head">
+        <h2 title="Screens, services and workers from which a permission protected API can be reached">Entry points</h2>
+      </div>
+      <div id="entry-list" class="plain-list"></div>
+    </div>
+    <div class="panel">
+      <div class="panel-head">
+        <h2 title="Components declared in AndroidManifest.xml with their export and protection state">Manifest components</h2>
+      </div>
+      <div id="component-list" class="plain-list"></div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="panel-head">
+      <h2 title="Build configuration and scan scope of the analyzed project">Project</h2>
+    </div>
+    <div id="project-info" class="chips"></div>
+  </section>
+</main>
+
+<footer>
+  <span id="generated-at" title="Timestamp of this analysis run"></span>
+  <span title="Static analysis tool that maps Android permissions to real code usage">Android Permission Usage Mapper</span>
+</footer>
+
+<script id="apum-data" type="application/json">__APUM_DATA__</script>
+<script>/*__APUM_SCRIPT__*/</script>
+</body>
+</html>
