@@ -1,4 +1,5 @@
-<img src="https://hizliresim.com/he6g6qjk" width="300" alt="preview">
+<img width="1052" height="527" alt="githubb" src="https://github.com/user-attachments/assets/da7d8b2c-82b4-4bcf-b45a-a61d7b381089" />
+
 # Android Permission Usage Mapper (APUM)
 
 ## What it is
